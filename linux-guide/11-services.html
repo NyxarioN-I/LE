@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بدء وإيقاف الخدمات - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 11</span>
+            <h1>بدء وإيقاف الخدمات</h1>
+            <p class="subtitle">Starting and Stopping Services</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>ما هي الخدمات؟</h2>
+        <p>الخدمات (Services) في Linux هي برامج تعمل بالخلفية وتوفّر وظائف معينة. مثل:</p>
+        <ul>
+            <li><strong>خادم الويب:</strong> Apache أو Nginx</li>
+            <li><strong>SSH:</strong> للوصول عن بُعد</li>
+            <li><strong>قاعدة البيانات:</strong> MySQL أو PostgreSQL</li>
+            <li><strong>جدار الحماية:</strong> UFW أو Firewalld</li>
+        </ul>
+
+        <h2>أمر systemctl</h2>
+        <p><strong>systemctl</strong> هو الأمر الأساسي لإدارة الخدمات في Linux الحديثة.</p>
+
+        <h3>الأوامر الأساسية</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># بدء تشغيل خدمة</span>
+sudo systemctl start [اسم-الخدمة]
+
+<span class="comment"># إيقاف خدمة</span>
+sudo systemctl stop [اسم-الخدمة]
+
+<span class="comment"># إعادة تشغيل خدمة</span>
+sudo systemctl restart [اسم-الخدمة]
+
+<span class="comment"># عرض حالة خدمة</span>
+sudo systemctl status [اسم-الخدمة]
+
+<span class="comment"># تفعيل التشغيل التلقائي مع النظام</span>
+sudo systemctl enable [اسم-الخدمة]
+
+<span class="comment"># تعطيل التشغيل التلقائي</span>
+sudo systemctl disable [اسم-الخدمة]
+
+<span class="comment"># عرض كل الخدمات النشطة</span>
+systemctl list-units --type=service
+            </code>
+        </div>
+
+        <h2>أمثلة عملية</h2>
+
+        <h3>1. خادم الويب Apache</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># بدء تشغيل Apache</span>
+sudo systemctl start apache2
+
+<span class="comment"># التحقق من الحالة</span>
+sudo systemctl status apache2
+
+<span class="comment"># إيقاف Apache</span>
+sudo systemctl stop apache2
+
+<span class="comment"># إعادة تشغيل Apache</span>
+sudo systemctl restart apache2
+
+<span class="comment"># تفعيل التشغيل التلقائي</span>
+sudo systemctl enable apache2
+            </code>
+        </div>
+
+        <h3>2. خدمة SSH</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># بدء تشغيل SSH</span>
+sudo systemctl start ssh
+
+<span class="comment"># التحقق من الحالة</span>
+sudo systemctl status ssh
+
+<span class="comment"># تفعيل التشغيل التلقائي</span>
+sudo systemctl enable ssh
+            </code>
+        </div>
+
+        <h3>3. قاعدة البيانات MySQL</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># بدء تشغيل MySQL</span>
+sudo systemctl start mysql
+
+<span class="comment"># التحقق من الحالة</span>
+sudo systemctl status mysql
+            </code>
+        </div>
+
+        <h2>قراءة مخرجات status</h2>
+        <p>عندما تكتب <span class="code-inline">systemctl status</span>، سترى something مثل:</p>
+
+        <div class="code-block">
+            <code>
+● apache2.service - The Apache HTTP Server
+     Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2024-01-15 10:30:00 UTC; 5min ago
+
+التفسير:
+- Loaded: تم تحميل الخدمة
+- enabled: ستبدأ تلقائياً مع النظام
+- Active: active (running) = تعمل حالياً
+- منذ متى وهي تعمل
+            </code>
+        </div>
+
+        <h2>جدول الخدمات الشائعة</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>الخدمة</th>
+                        <th>الوظيفة</th>
+                        <th>الأمر</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="code-inline">apache2</span></td><td>خادم الويب</td><td>sudo systemctl start apache2</td></tr>
+                    <tr><td><span class="code-inline">nginx</span></td><td>خادم الويب</td><td>sudo systemctl start nginx</td></tr>
+                    <tr><td><span class="code-inline">ssh</span></td><td>الوصول عن بُعد</td><td>sudo systemctl start ssh</td></tr>
+                    <tr><td><span class="code-inline">mysql</span></td><td>قاعدة البيانات</td><td>sudo systemctl start mysql</td></tr>
+                    <tr><td><span class="code-inline">postgresql</span></td><td>قاعدة البيانات</td><td>sudo systemctl start postgresql</td></tr>
+                    <tr><td><span class="code-inline">ufw</span></td><td>جدار الحماية</td><td>sudo systemctl start ufw</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 11: تمارين الخدمات</div>
+            <ol class="exercise-steps">
+                <li>شغّل أمر <span class="code-inline">sudo systemctl status apache2</span> واقرأ الحالة</li>
+                <li>إذا لم يكن Apache مثبّتاً، ثبّته بـ <span class="code-inline">sudo apt install apache2</span></li>
+                <li>شغّل Apache ثم تحقق من أنه يعمل</li>
+                <li>افتح المتصفح واكتب <span class="code-inline">http://localhost</span> لرؤية صفحة Apache</li>
+                <li>أوقف Apache وتأكد أنه توقف</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 الحل</summary>
+                <div class="solution-content">
+                    <div class="code-block">
+                        <code>
+sudo apt install apache2 -y
+sudo systemctl start apache2
+sudo systemctl status apache2
+<span class="comment"># افتح المتصفح واذهب لـ http://localhost</span>
+sudo systemctl stop apache2
+sudo systemctl status apache2
+                        </code>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="10-files.html" class="prev">السابق: إدارة الملفات</a>
+            <a href="12-packages.html" class="next">التالي: تثبيت الأدوات</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

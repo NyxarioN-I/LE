@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أوامر الشبكة - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 09</span>
+            <h1>أوامر الشبكة</h1>
+            <p class="subtitle">Common Network Commands</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>أوامر عرض معلومات الشبكة</h2>
+
+        <h3>1. ip a أو ifconfig - عرض عناوين IP</h3>
+        <p>تُستخدم لعرض واجهات الشبكة وعناوين IP المخصصة لها.</p>
+
+        <div class="code-block">
+            <code>
+<span class="comment"># الطريقة الجديدة (الموصى بها)</span>
+ip a
+
+<span class="comment"># الطريقة القديمة</span>
+ifconfig
+            </code>
+        </div>
+
+        <h4>شرح المخرجات</h4>
+        <div class="code-block">
+            <code>
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;
+    link/ether 08:00:27:xx:xx:xx
+    inet 192.168.1.100/24 brd 192.168.1.255 scope global eth0
+    inet6 fe80::a00:27ff:xxxx:xxxx/64 scope link
+
+التفسير:
+- eth0 = اسم الواجهة
+- UP = الواجهة مفعلة
+- inet = عنوان IPv4
+- /24 = ك水准 الشبكة (Subnet Mask)
+- brd = عنوان البث (Broadcast)
+            </code>
+        </div>
+
+        <h3>2. ping - فحص الاتصال</h3>
+        <p>تُستخدم للتحقق من الاتصال بجهاز آخر في الشبكة.</p>
+
+        <div class="code-block">
+            <code>
+<span class="comment"># فحص الاتصال بجهاز</span>
+ping 192.168.1.1
+
+<span class="comment"># إرسال 4 حزم فقط (مثل Windows)</span>
+ping -c 4 google.com
+
+<span class="comment"># فحص بمنفذ محدد</span>
+ping -p 80 google.com
+
+<span class="comment"># التوقف بعد وقت محدد</span>
+ping -c 10 192.168.1.1
+            </code>
+        </div>
+
+        <div class="tip">
+            <div class="tip-title">معلومة مهمة</div>
+            <p>بعض الأجهزة توقف ICMP ولن ترد على ping. هذا لا يعني أنها غير متصلة. استخدم <span class="code-inline">nmap</span> كبديل.</p>
+        </div>
+
+        <h3>3. ip r - جدول التوجيه</h3>
+        <p>تُعرض جدول التوجيه (Routing Table) الذي يُحدد كيفية وصول حركة المرور.</p>
+
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض جدول التوجيه</span>
+ip r
+
+<span class="comment"># أو</span>
+route
+
+<span class="comment"># المخرجات:</span>
+default via 192.168.1.1 dev eth0
+192.168.1.0/24 dev eth0 scope link
+
+<span class="comment"># التفسير:</span>
+# - الجهة الافتراضية: 192.168.1.1 (الراوتر)
+# - الشبكة المحلية: 192.168.1.0/24
+            </code>
+        </div>
+
+        <h3>4. arp -a - الجدول المرسال</h3>
+        <p>تُعرض ارتباط عناوين IP بعناوين MAC.</p>
+
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض ARP Table</span>
+arp -a
+
+<span class="comment"># أو</span>
+ip n
+
+<span class="comment"># المخرجات تُظهر:</span>
+# - عنوان IP ↔ عنوان MAC
+# - الارتباط بينهما
+            </code>
+        </div>
+
+        <h3>5. iwconfig - معلومات الشبكة اللاسلكية</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض معلومات الشبكات اللاسلكية</span>
+iwconfig
+            </code>
+        </div>
+
+        <h2>جدول مقارنة سريع</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>الأمر</th>
+                        <th>الوظيفة</th>
+                        <th>البديل</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="code-inline">ip a</span></td><td>عرض عناوين IP</td><td><span class="code-inline">ifconfig</span></td></tr>
+                    <tr><td><span class="code-inline">ip r</span></td><td>جدول التوجيه</td><td><span class="code-inline">route</span></td></tr>
+                    <tr><td><span class="code-inline">ip n</span></td><td>ARP Table</td><td><span class="code-inline">arp -a</span></td></tr>
+                    <tr><td><span class="code-inline">ping</span></td><td>فحص الاتصال</td><td>-</td></tr>
+                    <tr><td><span class="code-inline">iwconfig</span></td><td>معلومات WiFi</td><td>-</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>لماذا أوامر الشبكة مهمة للهاكرز؟</h2>
+        <ul>
+            <li><strong>اكتشاف الأجهزة:</strong> معرفة الأجهزة المتصلة في الشبكة</li>
+            <li><strong>فحص المنافذ:</strong> معرفة الخدمات تعمل على أي منافذ</li>
+            <li><strong>تتبع حركة المرور:</strong> فهم كيفية تدفق البيانات</li>
+            <li><strong>اكتشاف الشبكات المخفية:</strong> البحث عن شبكات غير مرئية</li>
+        </ul>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 9: تمارين الشبكة</div>
+            <ol class="exercise-steps">
+                <li>شغّل <span class="code-inline">ip a</span> وحدد عنوان IP الخاص بك</li>
+                <li>شغّل <span class="code-inline">ping -c 4 google.com</span> لفحص الاتصال بالإنترنت</li>
+                <li>شغّل <span class="code-inline">ip r</span> لمعرفة عنوان الراوتر</li>
+                <li>شغّل <span class="code-inline">arp -a</span> لرؤية الأجهزة المتصلة</li>
+                <li>شغّل <span class="code-inline">ping</span> على عنوان الراوتر</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 الحل</summary>
+                <div class="solution-content">
+                    <div class="code-block">
+                        <code>
+ip a
+ping -c 4 google.com
+ip r
+arp -a
+ping -c 4 192.168.1.1
+                        </code>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="08-users.html" class="prev">السابق: المستخدمون</a>
+            <a href="10-files.html" class="next">التالي: إدارة الملفات</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظرة عامة على Kali Linux - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 05</span>
+            <h1>نظرة عامة على Kali Linux</h1>
+            <p class="subtitle">Kali Linux Overview</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>ما هي Kali Linux؟</h2>
+        <p><strong>Kali Linux</strong> هي توزيعة لينكس مبنية على <strong>Debian</strong>، ومصممة خصيصاً لاختبار الاختراق وأمن المعلومات.</p>
+
+        <h3>لماذا Kali Linux؟</h3>
+        <ul>
+            <li><strong>مفتوحة المصدر:</strong> مجانية بالكامل وقابلة للتعديل</li>
+            <li><strong>600+ أداة:</strong> مثبّتة مسبقاً وجاهزة للاستخدام</li>
+            <li><strong>متخصصة:</strong> مصممة للهاكرز الأخلاقيين ومتقني الاختراق</li>
+            <li><strong>محدثة:</strong> تُحدّث بشكل دوري</li>
+            <li><strong>مجتمع كبير:</strong> دعم ومساعدة من آلاف المستخدمين</li>
+        </ul>
+
+        <h2>الأدوات المثبّتة مسبقاً</h2>
+        <p>Kali تأتي مع مئات الأدوات الجاهزة. إليك أهمها:</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>الأداة</th>
+                        <th>الفئة</th>
+                        <th>الاستخدام</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Nmap</strong></td><td>Network Scanning</td><td>مسح الشبكات والمنافذ</td></tr>
+                    <tr><td><strong>Metasploit</strong></td><td>Exploitation</td><td>اختبار الاختراق</td></tr>
+                    <tr><td><strong>Wireshark</strong></td><td>Network Analysis</td><td>تحليل حركة الشبكة</td></tr>
+                    <tr><td><strong>John the Ripper</strong></td><td>Password Cracking</td><td>كسر كلمات المرور</td></tr>
+                    <tr><td><strong>Aircrack-ng</strong></td><td>Wireless</td><td>اختبار أمان الشبكات اللاسلكية</td></tr>
+                    <tr><td><strong>Burp Suite</strong></td><td>Web Application</td><td>اختبار تطبيقات الويب</td></tr>
+                    <tr><td><strong>Hydra</strong></td><td>Password Attack</td><td>هجمات القوة الغاشمة</td></tr>
+                    <tr><td><strong>Nikto</strong></td><td>Web Scanner</td><td>ماسح ثغرات الويب</td></tr>
+                    <tr><td><strong>SQLMap</strong></td><td>Database</td><td>هجمات SQL Injection</td></tr>
+                    <tr><td><strong>Hashcat</strong></td><td>Password Cracking</td><td>كسر التجزئة</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>بنية Kali Linux</h2>
+        
+        <div class="tree">
+Kali Linux (Debian-based)
+├── GNOME Desktop Environment (واجهة سطح المكتب)
+├── Terminal (ال Sheldon - أهم أداة)
+├── Pre-installed Tools (600+ أداة)
+├── Custom Kernel (نظام مخصص)
+└── Rolling Release Model (تحديث مستمر)
+        </div>
+
+        <h2>سطح مكتب Kali</h2>
+        <p>عندما تسجّل الدخول، ستظهر لك واجهة سطح المكتب. أهم شي هو <strong>Terminal</strong> (النافذة السوداء).</p>
+
+        <h3>كيف تفتح Terminal</h3>
+        <ul>
+            <li>اضغط على أيقونة Terminal في شريط المهام</li>
+            <li>أو اضغط <span class="code-inline">Ctrl + Alt + T</span></li>
+            <li>أو ابحث في Applications عن Terminal</li>
+        </ul>
+
+        <h3>ال Terminal هو الأداة الأساسية</h3>
+        <p>في هذا الكورس، سنقضي معظم الوقت في الـ Terminal. كل الأوامر ستُكتب هنا.</p>
+
+        <div class="tip">
+            <div class="tip-title">معلومة مهمة</div>
+            <p>كثير من الهاكرز يفضلون Terminal لأنه أسرع وأقوى من الواجهة البصرية. تعلّم التعامل مع Terminal هو مفتاح النجاح في هذا المجال.</p>
+        </div>
+
+        <h2>أوامر التحديث الأول</h2>
+        <p>أول شي يجب فعله بعد التثبيت هو تحديث النظام:</p>
+
+        <div class="code-block">
+            <code>
+<span class="comment"># تحديث قائمة الحزم</span>
+sudo apt update
+
+<span class="comment"># ترقية كل الحزم المثبّتة</span>
+sudo apt upgrade
+
+<span class="comment"># تنظيف الحزم المؤقتة</span>
+sudo apt autoremove
+            </code>
+        </div>
+
+        <p>هذا يضمن أن لديك أحدث إصدارات الأدوات والنظام.</p>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 5: استكشاف Kali Linux</div>
+            <ol class="exercise-steps">
+                <li>افتح Terminal</li>
+                <li>شغّل أمر <span class="code-inline">sudo apt update && sudo apt upgrade -y</span></li>
+                <li>افتح قائمة Applications وشاهد الأدوات المتاحة</li>
+                <li>افتح أي أداة (مثل Nmap) وشاهد كيف تعمل</li>
+                <li>عُد للTerminal واكتب أمر <span class="code-inline">ls /usr/bin</span> لرؤية الأوامر المتاحة</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 ماذا سترى</summary>
+                <div class="solution-content">
+                    <p>عندما تكتب <span class="code-inline">ls /usr/bin</span>، سترى قائمة طويلة بالأوامر والأدوات المتاحة. هذا يُظهر لك مدى قوة Kali Linux!</p>
+                    <p>جرّب أيضاً:</p>
+                    <div class="code-block">
+                        <code>
+<span class="comment"># عرض كل الأدوات المثبّتة</span>
+dpkg --list | grep -i kali
+
+<span class="comment"># عرض إصدار Kali</span>
+cat /etc/os-release
+                        </code>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="04-configure-vbox.html" class="prev">السابق: إعداد VirtualBox</a>
+            <a href="06-sudo.html" class="next">التالي: أمر Sudo</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

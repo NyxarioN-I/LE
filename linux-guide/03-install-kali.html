@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تثبيت Kali Linux - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 03</span>
+            <h1>تثبيت Kali Linux</h1>
+            <p class="subtitle">Installing Kali Linux</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>تحميل Kali Linux</h2>
+        <p>أول شي تحتاجه هو تحميل صورة Kali Linux (ISO file) من الموقع الرسمي.</p>
+
+        <h3>خطوات التحميل</h3>
+        <ol>
+            <li>ادخل على: <span class="code-inline">kali.org/get-kali</span></li>
+            <li>اختر "Kali Linux 64-bit (Installer Image)"</li>
+            <li>اضغط "Download" وانتظر التحميل</li>
+            <li>حجم الملف حوالي 3.8 GB</li>
+        </ol>
+
+        <div class="warning">
+            <div class="warning-title">مهم</div>
+            <p>تأكد أنك تحمل النسخة الصحيحة. إذا جهازك 64-bit (معظم الأجهزة الحديثة)، حمّل النسخة 64-bit. إذا 32-bit، حمّل النسخة 32-bit.</p>
+        </div>
+
+        <h2>إعداد الـ VM لتثبيت Kali</h2>
+        <p>قبل تثبيت Kali، لازم تجهز جهاز افتراضي في VMware أو VirtualBox.</p>
+
+        <h3>في VMware</h3>
+        <ol>
+            <li>افتح VMware</li>
+            <li>اضغط "Create a New Virtual Machine"</li>
+            <li>اختر "Installer disc image file (ISO)" وحدد ملف Kali</li>
+            <li>اختر "Linux" كنوع النظام و"Debian 10.x 64-bit" كإصدار</li>
+            <li>أدخل اسم VM وحدد مكان الحفظ</li>
+            <li>حدد حجم القرص الافتراضي (20GB كحد أدنى)</li>
+            <li>اضغط "Finish"</li>
+        </ol>
+
+        <h3>في VirtualBox</h3>
+        <ol>
+            <li>افتح VirtualBox</li>
+            <li>اضغط "New"</li>
+            <li>أدخل اسم (مثل: Kali Linux) ونوع Linux</li>
+            <li>حدد حجم الذاكرة (4096 MB = 4GB كحد أدنى)</li>
+            <li>اختر "Create a virtual hard disk now"</li>
+            <li>اختر "VDI" ثم "Dynamically allocated"</li>
+            <li>حدد الحجم (20GB كحد أدنى)</li>
+        </ol>
+
+        <h2>تثبيت Kali Linux</h2>
+        <p>الآن جاهز لتثبيت Kali على الـ VM.</p>
+
+        <h3>خطوات التثبيت</h3>
+        <ol>
+            <li>شغّل الـ VM من ملف Kali ISO</li>
+            <li>اختر <strong>"Graphical Install"</strong> من القائمة</li>
+        </ol>
+
+        <div class="tip">
+            <div class="tip-title">نصيحة</div>
+            <p>"Graphical Install" أسهل للمبتدئين لأنه يعرض لك واجهة بصرية مع أزرار وخيارات واضحة.</p>
+        </div>
+
+        <ol start="3">
+            <li><strong>اختيار اللغة:</strong> اختر English أو Arabic حسب رغبتك</li>
+            <li><strong>اختيار المنطقة:</strong> حدد دولتك</li>
+            <li><strong>اختيار لوحة المفاتيح:</strong> اختر US أو حسب جهازك</li>
+            <li><strong>اسم المضيف (Hostname):</strong> اكتب اسماً (مثل: kali)</li>
+            <li><strong>اسم المستخدم:</strong> اكتب اسماً بسيطاً (مثل: hacker أو kali)</li>
+            <li><strong>كلمة المرور:</strong> ادخل كلمة مرور قوية (123456 مقبولة للممارسة)</li>
+            <li><strong>التقسيم (Partitioning):</strong> اختر "Guided - use entire disk"</li>
+            <li>اختر "All files in one partition"</li>
+            <li>اختر "Finish partitioning and write changes to disk"</li>
+            <li>اختر "Yes" لكتابة التغييرات</li>
+            <li>انتظر حتى ينتهي التثبيت (10-20 دقيقة)</li>
+            <li>اضغط "Continue" لإعادة التشغيل</li>
+        </ol>
+
+        <h2>بعد التثبيت</h2>
+        <p>بعد إعادة التشغيل:</p>
+        <ol>
+            <li>سجّل الدخول بكلمة المرور التي أدخلتها</li>
+            <li>ستظهر لك سطح مكتب Kali Linux</li>
+            <li>افتح Terminal (النافذة السوداء) وتكون جاهز!</li>
+        </ol>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 3: تثبيت Kali Linux</div>
+            <ol class="exercise-steps">
+                <li>حمّل Kali Linux من الموقع الرسمي</li>
+                <li>أنشئ جهاز افتراضي في برنامجك</li>
+                <li>ثبّت Kali باستخدام الخطوات أعلاه</li>
+                <li>سجّل الدخول وافتح Terminal</li>
+                <li>اكتب أمر <span class="code-inline">whoami</span> وتأكد أنه يعرض اسم المستخدم</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 التحقق من التثبيت</summary>
+                <div class="solution-content">
+                    <p>افتح Terminal واكتب:</p>
+                    <div class="code-block">
+                        <code>whoami</code>
+                    </div>
+                    <p>يجب أن يعرض اسم المستخدم الذي أنشأته. مثلاً: <span class="code-inline">kali</span> أو <span class="code-inline">hacker</span></p>
+                    <p>أيضاً جرّب:</p>
+                    <div class="code-block">
+                        <code>lsb_release -a</code>
+                    </div>
+                    <p>سيعرض معلومات Kali Linux والإصدار.</p>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="02-install-vmware.html" class="prev">السابق: تثبيت VMware</a>
+            <a href="04-configure-vbox.html" class="next">التالي: إعداد VirtualBox</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التنقل في نظام الملفات - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 07</span>
+            <h1>التنقل في نظام الملفات</h1>
+            <p class="subtitle">Navigating the File System</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>بنية المجلدات في Linux</h2>
+        <p>Linux يستخدم بنية شجرية (Tree Structure) لتنظيم الملفات والمجلدات. كل شي يبدأ من الجذر <span class="code-inline">/</span>.</p>
+
+        <div class="tree">
+/                           ← الجذر (Root)
+├── bin/                    ← الأوامر الأساسية
+├── boot/                   ← ملفات الإقلاع
+├── dev/                    ← الأجهزة
+├── etc/                    ← إعدادات النظام
+├── home/                   ← مجلدات المستخدمين
+│   └── [username]/
+│       ├── Desktop/
+│       ├── Documents/
+│       ├── Downloads/
+│       └── .bashrc
+├── lib/                    ← المكتبات
+├── media/                  ← الأجهزة الخارجية
+├── mnt/                    ← نقاط التثبيت
+├── opt/                    ← برامج إضافية
+├── proc/                   ← معلومات العمليات
+├── root/                   ← مجلد المدير
+├── sbin/                   ← أوامر النظام
+├── tmp/                    ← ملفات مؤقتة
+├── usr/                    ← برامج المستخدمين
+└── var/                    ← ملفات متغيرة
+        </div>
+
+        <h2>الأوامر الأساسية للتنقل</h2>
+
+        <h3>1. pwd - عرض المجلد الحالي</h3>
+        <p><strong>pwd</strong> اختصار لـ Print Working Directory. يعرض أين أنت الآن.</p>
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض المجلد الحالي</span>
+pwd
+
+<span class="comment"># النتيجة:</span>
+/home/kali
+            </code>
+        </div>
+
+        <h3>2. ls - عرض المحتويات</h3>
+        <p><strong>ls</strong> اختصار لـ List. يعرض كل الملفات والمجلدات في المجلد الحالي.</p>
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض الملفات العادية</span>
+ls
+
+<span class="comment"># عرض التفاصيل (الصلاحيات، الحجم، التاريخ)</span>
+ls -l
+
+<span class="comment"># عرض كل شيء (بما في ذلك الملفات المخفية)</span>
+ls -la
+
+<span class="comment"># عرض الأحجام بشكل مقروء (KB, MB, GB)</span>
+ls -lh
+
+<span class="comment"># ترتيب حسب تاريخ التعديل</span>
+ls -lt
+
+<span class="comment"># ترتيب حسب الحجم</span>
+ls -lS
+            </code>
+        </div>
+
+        <h3>3. cd - الانتقال بين المجلدات</h3>
+        <p><strong>cd</strong> اختصار لـ Change Directory. ينقلك لمجلد آخر.</p>
+        <div class="code-block">
+            <code>
+<span class="comment"># الانتقال لمجلد محدد</span>
+cd /home/kali
+
+<span class="comment"># الانتقال للمجلد الرئيسي (Home)</span>
+cd ~
+<span class="comment"># أو</span>
+cd
+
+<span class="comment"># الرجوع للمجلد الأب</span>
+cd ..
+
+<span class="comment"># الرجوع للمجلد السابق</span>
+cd -
+
+<span class="comment"># الانتقال لمجلد Downloads</span>
+cd Downloads
+
+<span class="comment"># الانتقال للمجلد من مسار مطلق</span>
+cd /var/log
+            </code>
+        </div>
+
+        <h3>4. mkdir - إنشاء مجلدات</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># إنشاء مجلد واحد</span>
+mkdir newfolder
+
+<span class="comment"># إنشاء مجلدات متعددة</span>
+mkdir dir1 dir2 dir3
+
+<span class="comment"># إنشاء مجلدات متداخلة</span>
+mkdir -p parent/child/grandchild
+            </code>
+        </div>
+
+        <h3>5. touch - إنشاء ملفات فارغة</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># إنشاء ملف فارغ</span>
+touch newfile.txt
+
+<span class="comment"># إنشاء عدة ملفات</span>
+touch file1.txt file2.txt file3.txt
+
+<span class="comment"># إنشاء ملفات بنمط</span>
+touch file{1..10}.txt
+            </code>
+        </div>
+
+        <h2>شرح تفصيلي لـ ls -l</h2>
+        <p>عندما تكتب <span class="code-inline">ls -l</span>، سترى something مثل:</p>
+
+        <div class="code-block">
+            <code>
+-rwxr-xr-- 1 kali kali 4096 Jan 15 10:30 file.txt
+            </code>
+        </div>
+
+        <p>هذا يعني:</p>
+        <div class="tree">
+- rwx r-x r-- 1 kali kali 4096 Jan 15 10:30 file.txt
+│ │││ │││ │││ │ │    │     │    │          │
+│ │││ │││ │││ │ │    │     │    │          └── اسم الملف
+│ │││ │││ │││ │ │    │     │    └── تاريخ التعديل
+│ │││ │││ │││ │ │    │     └── الحجم (بايت)
+│ │││ │││ │││ │ │    └── اسم المستخدم (المالك)
+│ │││ │││ │││ │ └── عدد الروابط
+│ │││ │││ │││ └── نوع الملف
+│ │││ │││ └┴┴── صلاحيات الجميع (Others)
+│ ││┘ └┴┴────── صلاحيات المجموعة (Group)
+└┴┴────────── صلاحيات المالك (Owner)
+        </div>
+
+        <div class="tip">
+            <div class="tip-title">نصيحة سريعة</div>
+            <p>اكتب <span class="code-inline">alias ll='ls -la'</span> في ملف <span class="code-inline">.bashrc</span> لتصنع أمر <span class="code-inline">ll</span> اختصاراً لـ <span class="code-inline">ls -la</span>.</p>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 7: تمارين التنقل</div>
+            <ol class="exercise-steps">
+                <li>اكتب <span class="code-inline">pwd</span> لعرض مجلدك الحالي</li>
+                <li>اكتب <span class="code-inline">cd /</span> للذهاب للجذر</li>
+                <li>اكتب <span class="code-inline">ls</span> لرؤية المجلدات</li>
+                <li>اكتب <span class="code-inline">cd home</span> ثم <span class="code-inline">cd</span> مرة أخرى</li>
+                <li>أنشئ مجلد باسم <span class="code-inline">practice</span> باستخدام mkdir</li>
+                <li>اانتقال داخله usando cd</li>
+                <li>أنشئ 3 ملفات فارغة باستخدام touch</li>
+                <li>اكتب <span class="code-inline">ls -la</span> لرؤية كل شيء</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 الحل</summary>
+                <div class="solution-content">
+                    <div class="code-block">
+                        <code>
+pwd
+cd /
+ls
+cd home
+cd
+mkdir practice
+cd practice
+touch file1.txt file2.txt file3.txt
+ls -la
+                        </code>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="06-sudo.html" class="prev">السابق: أمر Sudo</a>
+            <a href="08-users.html" class="next">التالي: المستخدمون والصلاحيات</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

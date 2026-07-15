@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تثبيت وتحديث الأدوات - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 12</span>
+            <h1>تثبيت وتحديث الأدوات</h1>
+            <p class="subtitle">Installing and Updating Tools</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>مدير الحزم apt</h2>
+        <p><strong>apt</strong> (Advanced Package Tool) هو مدير الحزم الرئيسي في Kali Linux وتبنيان Debian وUbuntu.</p>
+
+        <h3>الأوامر الأساسية</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># تحديث قائمة الحزم (يجب تشغيله أولاً)</span>
+sudo apt update
+
+<span class="comment"># ترقية كل الحزم المثبّتة</span>
+sudo apt upgrade
+
+<span class="comment"># تثبيت حزمة جديدة</span>
+sudo apt install [اسم-الحزمة]
+
+<span class="comment"># إزالة حزمة</span>
+sudo apt remove [اسم-الحزمة]
+
+<span class="comment"># إزالة حزمة مع إعداداتها</span>
+sudo apt purge [اسم-الحزمة]
+
+<span class="comment"># البحث عن حزمة</span>
+apt search [كلمة]
+
+<span class="comment"># عرض الحزم المثبّتة</span>
+apt list --installed
+
+<span class="comment"># تنظيف الحزم المؤقتة</span>
+sudo apt autoremove
+            </code>
+        </div>
+
+        <h2>الفرق بين update و upgrade</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>apt update</th>
+                        <th>apt upgrade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>يُحدّث قائمة الحزم المتاحة فقط</td><td>يُحدّث الحزم المثبّتة فعلياً</td></tr>
+                    <tr><td>لا يثبّت أي شي</td><td>يثبّت التحديثات الجديدة</td></tr>
+                    <tr><td>سريع جداً</td><td>قد يستغرق وقتاً</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>تحديث النظام في خطوة واحدة</h2>
+        <div class="code-block">
+            <code>
+<span class="comment"># تحديث وترقية وتنظيف في سطر واحد</span>
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+            </code>
+        </div>
+
+        <div class="tip">
+            <div class="tip-title">نصيحة</div>
+            <p>شغّل هذا الأمر كل يوم أو يومين للحفاظ على نظامك محدّثاً وآمناً.</p>
+        </div>
+
+        <h2>تثبيت أدوات مهمة للهاكرز</h2>
+
+        <h3>أدوات الشبكة</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># Nmap - ماسح الشبكات والمنافذ</span>
+sudo apt install nmap
+
+<span class="comment"># Netcat - أداة الشبكة</span>
+sudo apt install netcat
+
+<span class="comment"># Wireshark - محلل حركة الشبكة</span>
+sudo apt install wireshark
+            </code>
+        </div>
+
+        <h3>أدوات الاختراق</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># Nikto - ماسح ثغرات الويب</span>
+sudo apt install nikto
+
+<span class="comment"># Hydra - هجمات القوة الغاشمة</span>
+sudo apt install hydra
+
+<span class="comment"># SQLMap - هجمات SQL Injection</span>
+sudo apt install sqlmap
+            </code>
+        </div>
+
+        <h3>أدوات كسر كلمات المرور</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># John the Ripper</span>
+sudo apt install john
+
+<span class="comment"># Hashcat</span>
+sudo apt install hashcat
+            </code>
+        </div>
+
+        <h3>أدوات الشبكات اللاسلكية</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># Aircrack-ng</span>
+sudo apt install aircrack-ng
+            </code>
+        </div>
+
+        <h3>أدوات أخرى مفيدة</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># Git - إدارة الأكواد</span>
+sudo apt install git
+
+<span class="comment"># Python3 pip - مدير حزم Python</span>
+sudo apt install python3-pip
+
+<span class="comment"># Vim - محرر متقدم</span>
+sudo apt install vim
+
+<span class="comment"># HTOP - عرض العمليات</span>
+sudo apt install htop
+            </code>
+        </div>
+
+        <h2>عرض الحزم المثبّتة</h2>
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض كل الحزم المثبّتة</span>
+apt list --installed
+
+<span class="comment"># البحث عن حزمة معينة</span>
+apt search nmap
+
+<span class="comment"># معرفة معلومات عن حزمة</span>
+apt show nmap
+            </code>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 12: تثبيت الأدوات</div>
+            <ol class="exercise-steps">
+                <li>شغّل <span class="code-inline">sudo apt update</span> لتحديث القائمة</li>
+                <li>ثبّت Nmap بـ <span class="code-inline">sudo apt install nmap</span></li>
+                <li>تأكد من التثبيت بـ <span class="code-inline">nmap --version</span></li>
+                <li>ثبّت حزمة أخرى من اختيارك</li>
+                <li>شغّل <span class="code-inline">apt list --installed | grep [اسم-الحزمة]</span> للتأكد</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 الحل</summary>
+                <div class="solution-content">
+                    <div class="code-block">
+                        <code>
+sudo apt update
+sudo apt install nmap -y
+nmap --version
+
+<span class="comment"># مثال آخر</span>
+sudo apt install htop -y
+apt list --installed | grep htop
+                        </code>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="11-services.html" class="prev">السابق: الخدمات</a>
+            <a href="13-bash.html" class="next">التالي: Bash Scripting</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>
