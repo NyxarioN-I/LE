@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الملفات - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 10</span>
+            <h1>عرض وإنشاء وتعديل الملفات</h1>
+            <p class="subtitle">Viewing, Creating, and Editing Files</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>عرض محتوى الملفات</h2>
+
+        <h3>1. cat - عرض كامل الملف</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض كامل الملف</span>
+cat file.txt
+
+<span class="comment"># عرض عدة ملفات</span>
+cat file1.txt file2.txt
+            </code>
+        </div>
+
+        <h3>2. head - عرض أول أسطر</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض أول 10 أسطر (الافتراضي)</span>
+head file.txt
+
+<span class="comment"># عرض أول 20 سطر</span>
+head -n 20 file.txt
+
+<span class="comment"># عرض أول 5 أسطر</span>
+head -5 file.txt
+            </code>
+        </div>
+
+        <h3>3. tail - عرض آخر أسطر</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض آخر 10 أسطر (الافتراضي)</span>
+tail file.txt
+
+<span class="comment"># عرض آخر 20 سطر</span>
+tail -n 20 file.txt
+
+<span class="comment"># متابعة الملف (مفيد للـ logs)</span>
+tail -f /var/log/syslog
+            </code>
+        </div>
+
+        <h3>4. less و more - تصفح الملف</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># تصفح الملف (مفاتيح: أسهم، q للخروج)</span>
+less file.txt
+
+<span class="comment"># تصفح الملف</span>
+more file.txt
+            </code>
+        </div>
+
+        <h2>البحث في الملفات</h2>
+
+        <h3>grep - البحث عن نص محدد</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># البحث عن كلمة في ملف</span>
+grep "كلمة" file.txt
+
+<span class="comment"># بحث بدون تمييز الأحرف</span>
+grep -i "كلمة" file.txt
+
+<span class="comment"># عرض الأسطر مع أرقامها</span>
+grep -n "كلمة" file.txt
+
+<span class="comment"># عرض عدد التكرارات</span>
+grep -c "كلمة" file.txt
+
+<span class="comment"># بحث في كل المجلدات</span>
+grep -r "كلمة" /path/to/directory/
+
+<span class="comment"># بحث بكلمة كاملة فقط</span>
+grep -w "كلمة" file.txt
+
+<span class="comment"># عرض سطر قبل وبعد التطابق</span>
+grep -B 2 -A 2 "كلمة" file.txt
+            </code>
+        </div>
+
+        <h2>إنشاء وتعديل الملفات</h2>
+
+        <h3>1. touch - إنشاء ملف فارغ</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># إنشاء ملف فارغ</span>
+touch newfile.txt
+
+<span class="comment"># إنشاء عدة ملفات</span>
+touch file{1..10}.txt
+            </code>
+        </div>
+
+        <h3>2. echo - إنشاء ملف بنص</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># إنشاء ملف بنص (يمسح المحتوى القديم)</span>
+echo "مرحباً بالعالم" > hello.txt
+
+<span class="comment"># إضافة نص للملف (追加)</span>
+echo "سطر إضافي" >> hello.txt
+
+<span class="comment"># إنشاء ملف مع عدة أسطر</span>
+echo -e "السطر الأول\nالسطر الثاني\nالسطر الثالث" > multi.txt
+            </code>
+        </div>
+
+        <h3>3.cp و mv - النسخ والنقل</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># نسخ ملف</span>
+cp file.txt backup.txt
+
+<span class="comment"># نسخ مجلد</span>
+cp -r folder/ backup_folder/
+
+<span class="comment"># نقل ملف</span>
+mv file.txt /new/location/
+
+<span class="comment"># إعادة تسمية ملف</span>
+mv oldname.txt newname.txt
+            </code>
+        </div>
+
+        <h3>4. rm - حذف ملفات</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># حذف ملف</span>
+rm file.txt
+
+<span class="comment"># حذف مجلد وتحته</span>
+rm -rf folder/
+
+<span class="comment"># حذف بدون تأكيد</span>
+rm -f file.txt
+            </code>
+        </div>
+
+        <h2>المحررات</h2>
+
+        <h3>nano - المحرر السهل</h3>
+        <p>محرر سهل جداً للمبتدئين.</p>
+        <div class="code-block">
+            <code>
+<span class="comment"># فتح ملف للتعديل</span>
+nano file.txt
+
+<span class="comment"># أوامر nano:</span>
+# Ctrl + O    → حفظ
+# Ctrl + X    → خروج
+# Ctrl + K    → قص سطر
+# Ctrl + U    → لصق
+# Ctrl + W    → بحث
+# Ctrl + C    → عرض رقم السطر الحالي
+            </code>
+        </div>
+
+        <h3>vim - المحرر المتقدم</h3>
+        <p>محرر قوي لكنه يحتاج تدريباً.</p>
+        <div class="code-block">
+            <code>
+<span class="comment"># فتح ملف</span>
+vim file.txt
+
+<span class="comment"># أوامر vim:</span>
+# ESC        → للخروج من وضع الكتابة
+# i          → للدخول لوضع الكتابة (Insert)
+# :wq        → حفظ وخروج
+# :q!        → خروج بدون حفظ
+# dd         → حذف سطر
+# yy         → نسخ سطر
+# p          → لصق
+# /text      → بحث عن text
+            </code>
+        </div>
+
+        <h2>أوامر مفيدة أخرى</h2>
+        <div class="code-block">
+            <code>
+<span class="comment"># عدّ عدد الأسطر</span>
+wc -l file.txt
+
+<span class="comment"># عدّ الكلمات</span>
+wc -w file.txt
+
+<span class="comment"># مقارنة ملفين</span>
+diff file1.txt file2.txt
+
+<span class="comment"># ترتيب محتوى ملف</span>
+sort file.txt
+
+<span class="comment"># إزالة الأسطر المكررة</span>
+uniq file.txt
+            </code>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 10: تمارين الملفات</div>
+            <ol class="exercise-steps">
+                <li>أنشئ ملفاً باسم <span class="code-inline">notes.txt</span> واسم "Hello" فيه</li>
+                <li>أضف 3 أسطر إضافية للملف</li>
+                <li>اعرض أول سطرين من الملف</li>
+                <li>ابحث عن كلمة معينة في الملف</li>
+                <li>انسخ الملف لاسم جديد</li>
+                <li>احذف الملف الأصلي</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 الحل</summary>
+                <div class="solution-content">
+                    <div class="code-block">
+                        <code>
+echo "Hello" > notes.txt
+echo "Line 2" >> notes.txt
+echo "Line 3" >> notes.txt
+echo "Line 4" >> notes.txt
+
+head -2 notes.txt
+
+grep "Hello" notes.txt
+
+cp notes.txt notes_backup.txt
+
+rm notes.txt
+
+ls -l
+                        </code>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="09-network.html" class="prev">السابق: أوامر الشبكة</a>
+            <a href="11-services.html" class="next">التالي: الخدمات</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

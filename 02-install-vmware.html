@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تثبيت VMware أو VirtualBox - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 02</span>
+            <h1>تثبيت VMware أو VirtualBox</h1>
+            <p class="subtitle">Installing VMware or VirtualBox</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>ما هي البرامج الافتراضية؟</h2>
+        <p>البرامج الافتراضية (Virtualization Software) تسمح لك بتشغيل نظام تشغيل آخر داخل نظامك الحالي بدون ما تأثر عليه. يعني تقدر تجرب Linux على جهاز Windows بدون ما تحذف ويندوز!</p>
+
+        <h2>VMware Workstation Player</h2>
+        <p>هذا البرنامج من شركة VMware، ويعتبر من أفضل البرامج في هذا المجال.</p>
+        
+        <h3>المميزات</h3>
+        <ul>
+            <li>مجاني للاستخدام الشخصي</li>
+            <li>أداء ممتاز وسريع</li>
+            <li>سهل الاستخدام</li>
+            <li>يدعم معظم أنظمة التشغيل</li>
+        </ul>
+
+        <h3>خطوات التحميل والتثبيت</h3>
+        <ol>
+            <li>ادخل على الموقع الرسمي: <span class="code-inline">vmware.com</span></li>
+            <li>اذهب لقسم المنتجات واختر <strong>Workstation Player</strong></li>
+            <li>اضغط "Download" واختر النسخة المناسبة لنظامك</li>
+            <li>شغّل ملف التثبيت واتبع الخطوات</li>
+            <li>أعد تشغيل الكمبيوتر بعد التثبيت</li>
+        </ol>
+
+        <h2>VirtualBox</h2>
+        <p>هذا البرنامج من شركة Oracle، وهو مفتوح المصدر ومجاني بالكامل.</p>
+
+        <h3>المميزات</h3>
+        <ul>
+            <li>مجاني بالكامل (Open Source)</li>
+            <li>يعمل على كل الأنظمة (Windows, Mac, Linux)</li>
+            <li>مجتمع دعم كبير</li>
+            <li>إضافات كثيرة متاحة</li>
+        </ul>
+
+        <h3>خطوات التحميل والتثبيت</h3>
+        <ol>
+            <li>ادخل على الموقع الرسمي: <span class="code-inline">virtualbox.org</span></li>
+            <li>اضغط "Downloads"</li>
+            <li>اختر النسخة المناسبة لنظامك</li>
+            <li>شغّل ملف التثبيت واتبع الخطوات</li>
+            <li>ثبّت الـ Extension Pack اختيارياً</li>
+        </ol>
+
+        <h2>أيهما تختار؟</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>الميزة</th>
+                        <th>VMware Player</th>
+                        <th>VirtualBox</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>التكلفة</td><td>مجاني (شخصي)</td><td>مجاني بالكامل</td></tr>
+                    <tr><td>الأداء</td><td>ممتاز</td><td>جيد جداً</td></tr>
+                    <tr><td>سهولة الاستخدام</td><td>سهل جداً</td><td>سهل</td></tr>
+                    <tr><td>الدعم</td><td>محدود (مجاني)</td><td>مجتمع كبير</td></tr>
+                    <tr><td>التوافق</td><td>Windows, Mac, Linux</td><td>كل الأنظمة</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip">
+            <div class="tip-title">توصيتي</div>
+            <p>إذا كنت مبتدئ، استخدم <strong>VirtualBox</strong> لأنه مجاني بالكامل وسهل. إذا كنت تريد أداء أفضل، استخدم <strong>VMware Player</strong>.</p>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 2: تثبيت برنامج افتراضي</div>
+            <ol class="exercise-steps">
+                <li>اختر برنامجاً افتراضياً (VMware أو VirtualBox)</li>
+                <li>حمّله من الموقع الرسمي</li>
+                <li>ثبّته على جهازك</li>
+                <li>تأكد أنه يعمل بشكل صحيح</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 كيف تتأكد أنه يعمل</summary>
+                <div class="solution-content">
+                    <p>بعد التثبيت:</p>
+                    <ul>
+                        <li>افتح البرنامج</li>
+                        <li>تأكد تقدر تنشئ "جهاز افتراضي جديد" (New Virtual Machine)</li>
+                        <li>تأكد الخيارات متاحة وغير ضبابية</li>
+                        <li>إذا شفت Options كثيرة، فأنت جاهز!</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="01-introduction.html" class="prev">السابق: المقدمة</a>
+            <a href="03-install-kali.html" class="next">التالي: تثبيت Kali Linux</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

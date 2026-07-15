@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أمر Sudo - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 06</span>
+            <h1>أمر Sudo</h1>
+            <p class="subtitle">Sudo Overview</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>ما هو Sudo؟</h2>
+        <p><strong>Sudo</strong> اختصار لـ <strong>Super User DO</strong> (نفّذ كمدير). هذا الأمر يعطيك صلاحيات المدير (Root) مؤقتاً لتنفيذ أوامر معينة.</p>
+
+        <h2>لماذا نحتاج Sudo؟</h2>
+        <p>في Linux، بعض الأوامر تحتاج صلاحيات خاصة لتنفيذها. بدون Sudo، سترى رسالة خطأ مثل:</p>
+
+        <div class="code-block">
+            <code>sudo: unable to initialize policy plugin</code>
+        </div>
+
+        <h3>أمثلة على عمليات تحتاج Sudo</h3>
+        <ul>
+            <li>تنزيل برامج جديدة</li>
+            <li>تعديل ملفات النظام</li>
+            <li>تغيير إعدادات الشبكة</li>
+            <li>بدء أو إيقاف الخدمات</li>
+            <li>تعديل صلاحيات الملفات</li>
+        </ul>
+
+        <h2>كيفية استخدام Sudo</h2>
+        
+        <div class="code-block">
+            <code>
+<span class="comment"># الصيغة الأساسية</span>
+sudo [الأمر]
+
+<span class="comment"># مثال: تحديث النظام</span>
+sudo apt update
+
+<span class="comment"># مثال: تثبيت برنامج</span>
+sudo apt install nmap
+
+<span class="comment"># مثال: الدخول كمدير كامل</span>
+sudo su
+
+<span class="comment"># الخروج من وضع المدير</span>
+exit
+            </code>
+        </div>
+
+        <h2>الفرق بين sudo و su</h2>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>sudo</th>
+                        <th>su</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>نفّذ أمر واحد بصلاحيات المدير</td><td>ادخل وضع المدير بالكامل</td></tr>
+                    <tr><td>تبقى مستخدم عادي</td><td>تصبح مستخدم root</td></tr>
+                    <tr><td>أكثر أماناً</td><td>أقل أماناً</td></tr>
+                    <tr><td>يطلب كلمة مرور المستخدم</td><td>يطلب كلمة مرور root</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>أوامر Sudo المفيدة</h2>
+
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض صلاحيات المستخدم الحالي</span>
+sudo -l
+
+<span class="comment"># الدخول كمدير كامل (غير موصى به)</span>
+sudo su
+
+<span class="comment"># تنفيذ أمر بصلاحيات مستخدم آخر</span>
+sudo -u username command
+
+<span class="comment"># عرض معلومات sudoers</span>
+sudo cat /etc/sudoers
+
+<span class="comment"># تعديل sudoers (بمعدل visudo)</span>
+sudo visudo
+            </code>
+        </div>
+
+        <div class="warning">
+            <div class="warning-title">تحذير مهم</div>
+            <p>لا تستخدم <span class="code-inline">sudo su</span> إلا عند الضرورة القصوى. العمل بصلاحيات root قد يسبب مشاكل إذا كتبت أمر خطأ. الأفضل استخدام <span class="code-inline">sudo</span> قبل كل أمر يحتاج صلاحيات.</p>
+        </div>
+
+        <h2>النصيحة الذهبية</h2>
+        <div class="tip">
+            <div class="tip-title">قاعدة مهمة</div>
+            <p>إذا كنت تتردد: هل أحتاج sudo أم لا؟ الجواب通常是 نعم. إذا طلب منك كلمة مرور، فأنت تحتاج sudo.</p>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 6: تمارين Sudo</div>
+            <ol class="exercise-steps">
+                <li>شغّل أمر <span class="code-inline">apt update</span> بدون sudo وشاهد الخطأ</li>
+                <li>شغّل نفس الأمر مع <span class="code-inline">sudo apt update</span> وتأكد أنه يعمل</li>
+                <li>شغّل <span class="code-inline">sudo -l</span> لعرض صلاحياتك</li>
+                <li>شغّل <span class="code-inline">whoami</span> ثم <span class="code-inline">sudo whoami</span> وقارن النتائج</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 النتائج المتوقعة</summary>
+                <div class="solution-content">
+                    <p><span class="code-inline">apt update</span> بدون sudo:</p>
+                    <div class="code-block">
+                        <code>Permission denied</code>
+                    </div>
+                    <p><span class="code-inline">sudo apt update</span>:</p>
+                    <div class="code-block">
+                        <code>
+Hit:1 http://kali.org/kali kali-rolling InRelease
+Reading package lists... Done
+                        </code>
+                    </div>
+                    <p><span class="code-inline">whoami</span> يعرض: <span class="code-inline">kali</span> (أو اسم المستخدم)</p>
+                    <p><span class="code-inline">sudo whoami</span> يعرض: <span class="code-inline">root</span></p>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="05-kali-overview.html" class="prev">السابق: نظرة عامة على Kali</a>
+            <a href="07-file-system.html" class="next">التالي: نظام الملفات</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

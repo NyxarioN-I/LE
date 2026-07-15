@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستخدمون والصلاحيات - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 08</span>
+            <h1>المستخدمون والصلاحيات</h1>
+            <p class="subtitle">Users and Privileges</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>أنواع المستخدمين</h2>
+        <p>في Linux، هناك أنواع مختلفة من المستخدمين، لكل نوع صلاحيات مختلفة.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>النوع</th>
+                        <th>الصلاحيات</th>
+                        <th>المثال</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Root</strong></td><td>صلاحيات كاملة على النظام بالكامل</td><td>root</td></tr>
+                    <tr><td><strong>Regular User</strong></td><td>صلاحيات محدودة</td><td>kali, hacker</td></tr>
+                    <tr><td><strong>System User</strong></td><td>لتشغيل الخدمات فقط</td><td>www-data, mysql</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>أنواع الصلاحيات</h2>
+        <p>كل ملف ومجلد في Linux له صلاحيات تحدد من يمكنه قراءته أو كتابته أو تشغيله.</p>
+
+        <h3>الأنواع الثلاثة للصلاحيات</h3>
+        <div class="code-block">
+            <code>
+r = Read (قراءة)     = 4
+w = Write (كتابة)    = 2
+x = Execute (تنفيذ)  = 1
+- = No permission    = 0
+            </code>
+        </div>
+
+        <h3>من يمكنه الصلاحيات؟</h3>
+        <div class="tree">
+- rwx r-x r-- 1 user group 4096 file.txt
+  │││ │││ │││
+  │││ │││ └┴┴── Others (الجميع) 
+  │││ └┴┴────── Group (المجموعة)
+  └┴┴────────── User/Owner (المالك)
+        </div>
+
+        <h3>أمثلة على الصلاحيات</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>الرقم</th>
+                        <th>المعنى</th>
+                        <th>الشرح</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="code-inline">755</span></td><td>rwxr-xr-x</td><td>المالك: كامل، المجموعة والجميع: قراءة وتنفيذ</td></tr>
+                    <tr><td><span class="code-inline">644</span></td><td>rw-r--r--</td><td>المالك: قراءة وكتابة، الآخرون: قراءة فقط</td></tr>
+                    <tr><td><span class="code-inline">777</span></td><td>rwxrwxrwx</td><td>الكل: كامل الصلاحيات (خطير!)</td></tr>
+                    <tr><td><span class="code-inline">444</span></td><td>r--r--r--</td><td>الكل: قراءة فقط</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>أوامر إدارة المستخدمين</h2>
+
+        <div class="code-block">
+            <code>
+<span class="comment"># عرض المستخدم الحالي</span>
+whoami
+
+<span class="comment"># عرض معلومات المستخدم</span>
+id
+
+<span class="comment"># إضافة مستخدم جديد</span>
+sudo adduser newuser
+
+<span class="comment"># إضافة مستخدم لمجموعة</span>
+sudo usermod -aG sudo newuser
+
+<span class="comment"># تغيير كلمة المرور</span>
+passwd
+
+<span class="comment"># حذف مستخدم</span>
+sudo deluser newuser
+
+<span class="comment"># عرض كل المستخدمين</span>
+cat /etc/passwd
+
+<span class="comment"># عرض المجموعات</span>
+cat /etc/group
+            </code>
+        </div>
+
+        <h2>تغيير الصلاحيات chmod</h2>
+        <p><strong>chmod</strong> اختصار لـ Change Mode. يُستخدم لتغيير صلاحيات الملفات والمجلدات.</p>
+
+        <h3>الطريقة الرقمية</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># جعل الملف قابل للتنفيذ</span>
+chmod +x script.sh
+
+<span class="comment"># إضافة تنفيذ للمالك</span>
+chmod u+x file.txt
+
+<span class="comment"># إضافة كتابة للمجموعة</span>
+chmod g+w file.txt
+
+<span class="comment"># إزالة قراءة عن الجميع</span>
+chmod o-r file.txt
+
+<span class="comment"># استخدام الأرقام</span>
+chmod 755 file.txt    # rwxr-xr-x
+chmod 644 file.txt    # rw-r--r--
+chmod 777 file.txt    # rwxrwxrwx (danger!)
+chmod 444 file.txt    # r--r--r--
+
+<span class="comment"># تغيير الصلاحيات لمجلد وتحته</span>
+chmod -R 755 directory/
+            </code>
+        </div>
+
+        <h3>الطريقة الرمزية</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># u = user (المالك)</span>
+<span class="comment"># g = group (المجموعة)</span>
+<span class="comment"># o = others (الجميع)</span>
+<span class="comment"># a = all (الكل)</span>
+
+chmod u+x file.txt    # إضافة تنفيذ للمالك
+chmod g+w file.txt    # إضافة كتابة للمجموعة
+chmod o-r file.txt    # إزالة قراءة عن الجميع
+chmod a+r file.txt    # إضافة قراءة للكل
+            </code>
+        </div>
+
+        <h2>تغيير المالك chown</h2>
+        <div class="code-block">
+            <code>
+<span class="comment"># تغيير مالك الملف</span>
+sudo chown user:group file.txt
+
+<span class="comment"># تغيير مالك مجلد وتحته</span>
+sudo chown -R user:group directory/
+
+<span class="comment"># تغيير المالك فقط</span>
+sudo chown user file.txt
+
+<span class="comment"># تغيير المجموعة فقط</span>
+sudo chgrp group file.txt
+            </code>
+        </div>
+
+        <div class="warning">
+            <div class="warning-title">تحذير</div>
+            <p>لا تستخدم <span class="code-inline">chmod 777</span> إلا عند الضرورة القصوى. هذا يعطي كل الصلاحيات للجميع وهو خطير على الأمان!</p>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 8: تمارين المستخدمين والصلاحيات</div>
+            <ol class="exercise-steps">
+                <li>شغّل <span class="code-inline">whoami</span> و<span class="code-inline">id</span> لمعرفة معلوماتك</li>
+                <li>أنشئ مستخدم جديد باسم <span class="code-inline">testuser</span></li>
+                <li>أنشئ ملفاً وغيّر صلاحياته إلى <span class="code-inline">755</span></li>
+                <li>أنشئ ملفاً واجعله للقراءة فقط <span class="code-inline">444</span></li>
+                <li>جرّب حذف الملف المحمي وشاهد الخطأ</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 الحل</summary>
+                <div class="solution-content">
+                    <div class="code-block">
+                        <code>
+whoami
+id
+sudo adduser testuser
+touch testfile1.txt
+chmod 755 testfile1.txt
+ls -l testfile1.txt
+
+touch testfile2.txt
+chmod 444 testfile2.txt
+ls -l testfile2.txt
+
+rm testfile2.txt
+<span class="comment"># سترى: rm: remove write-protected regular empty file 'testfile2.txt'?</span>
+                        </code>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="07-file-system.html" class="prev">السابق: نظام الملفات</a>
+            <a href="09-network.html" class="next">التالي: أوامر الشبكة</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

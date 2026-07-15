@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعداد VirtualBox - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 04</span>
+            <h1>إعداد VirtualBox</h1>
+            <p class="subtitle">Configuring VirtualBox</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>لماذا نحتاج إعداد الـ VM؟</h2>
+        <p>بعد تثبيت Kali Linux، لازم نعدّ بعض الإعدادات عشان الـ VM يشتغل بشكل أفضل وسريع.</p>
+
+        <h2>الإعدادات المهمة</h2>
+        
+        <h3>1. System (النظام)</h3>
+        <p>اضغط على VM ثم Settings ثم تبويب System:</p>
+        
+        <h4> Motherboard (اللوحة الأم)</h4>
+        <ul>
+            <li><strong>Boot Order:</strong> ضع Hard Disk في الأعلى (أولاً)</li>
+            <li><strong>Base Memory:</strong> 4096 MB (4GB) كحد أدنى</li>
+        </ul>
+
+        <h4>Processor (المعالج)</h4>
+        <ul>
+            <li><strong>Processors:</strong> 2 معالج كحد أدنى</li>
+            <li>إذا كان جهازك قوي، زِد العدد</li>
+        </ul>
+
+        <h3>2. Display (العرض)</h3>
+        <ul>
+            <li><strong>Video Memory:</strong> 128 MB</li>
+            <li><strong>Graphics Controller:</strong> VMSVGA</li>
+        </ul>
+
+        <h3>3. Network (الشبكة)</h3>
+        <p>هذا أهم إعداد!</p>
+        <ul>
+            <li><strong>Attached to:</strong> Bridged Adapter</li>
+            <li><strong>Name:</strong> اختر واجهة الشبكة الخاصة بك</li>
+        </ul>
+
+        <div class="tip">
+            <div class="tip-title">لماذا Bridged Adapter؟</div>
+            <p>هذا الإعداد يجعل الـ VM يظهر كجهاز مستقل على الشبكة. يعني يقدر يحصل على IP من الراوتر ويتشابك مع الأجهزة الأخرى في الشبكة. هذا ضروري لاختبار الشبكات.</p>
+        </div>
+
+        <h2>الإعدادات خطوة بخطوة</h2>
+        
+        <div class="tree">
+System
+├── Motherboard
+│   ├── Boot Order: Hard Disk أولاً
+│   └── Base Memory: 4096 MB
+├── Processor
+│   └── Processors: 2
+├── Display
+│   ├── Video Memory: 128 MB
+│   └── Graphics Controller: VMSVGA
+└── Network
+    └── Adapter 1
+        └── Attached to: Bridged Adapter
+        </div>
+
+        <h3>إعدادات إضافية</h3>
+        
+        <h4>Shared Folders (مجلدات مشتركة)</h4>
+        <p>تقدر تشارك مجلد من جهازك الحقيقي مع الـ VM:</p>
+        <ol>
+            <li>اذهب لـ Settings ثم Shared Folders</li>
+            <li>اضغط على أيقونة المجلد (+)</li>
+            <li>حدد المجلد من جهازك</li>
+            <li>حدد "Auto-mount"</li>
+        </ol>
+
+        <h4>USB Settings</h4>
+        <p>إذا كنت تحتاج توصيل أجهزة USB بالـ VM:</p>
+        <ol>
+            <li>اذهب لـ Settings ثم USB</li>
+            <li>اختر "USB 2.0 (EHCI) Controller" أو "USB 3.0"</li>
+        </ol>
+
+        <h2>التشغيل الأول</h2>
+        <p>بعد الإعداد، شغّل الـ VM:</p>
+        <ol>
+            <li>اضغط "Start" لتشغيل الـ VM</li>
+            <li>ستظهر لك شاشة Kali Linux</li>
+            <li>سجّل الدخول</li>
+            <li>افتح Terminal</li>
+        </ol>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 4: إعداد الـ VM</div>
+            <ol class="exercise-steps">
+                <li>افتح إعدادات الـ VM الخاص بك</li>
+                <li>عدّل الإعدادات كما هو موضح أعلاه</li>
+                <li>تأكد أن Boot Order يبدأ من Hard Disk</li>
+                <li>تأكد أن Base Memory 4GB على الأقل</li>
+                <li>تأكد أن Network على Bridged Adapter</li>
+                <li>شغّل الـ VM وتأكد أنه يعمل بشكل سريع</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 التحقق من الإعدادات</summary>
+                <div class="solution-content">
+                    <p>داخل Kali Linux، افتح Terminal واكتب:</p>
+                    <div class="code-block">
+                        <code>free -h</code>
+                    </div>
+                    <p>تأكد أن الذاكرة تقريباً 4GB.</p>
+                    <div class="code-block">
+                        <code>ip a</code>
+                    </div>
+                    <p>تأكد أن عندك عنوان IP من الشبكة (ليس 127.0.0.1).</p>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="03-install-kali.html" class="prev">السابق: تثبيت Kali</a>
+            <a href="05-kali-overview.html" class="next">التالي: نظرة عامة على Kali</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>

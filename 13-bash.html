@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البرمجة النصية Bash - Linux for Ethical Hackers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">🐧 Linux Guide</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <div class="container">
+            <span class="lesson-number">Lesson 13</span>
+            <h1>البرمجة النصية Bash</h1>
+            <p class="subtitle">Scripting with Bash</p>
+        </div>
+    </header>
+
+    <section class="content container">
+        
+        <h2>ما هي Bash Scripting؟</h2>
+        <p><strong>Bash</strong> (Bourne Again Shell) هي لغة برمجة نصية تُستخدم لأتمام المهام في Linux. تقدر تكتب سكربتات (ملفات تحتوي أوامر) لتنفيذ مهام معينة تلقائياً.</p>
+
+        <h2>لماذا نتعلم Bash؟</h2>
+        <ul>
+            <li><strong>أتمتة المهام المتكررة:</strong> بدل ما تكتب نفس الأمر 100 مرة</li>
+            <li><strong>دمج عدة أوامر:</strong> تنفيذ مهام معقدة في ملف واحد</li>
+            <li><strong>بناء أدوات مخصصة:</strong> أدوات اختراق مبنية حسب احتياجك</li>
+            <li><strong> tiết kiệm الوقت:</strong> سكربت واحد يسوي شغل ساعات</li>
+        </ul>
+
+        <h2>الهيكل الأساسي للسكربت</h2>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+# هذا سطر التعليق الأولي
+# يُخبر النظام أن هذا ملف Bash
+
+# كودك هنا
+echo "مرحباً بالعالم!"
+            </code>
+        </div>
+
+        <h3>خطوات تشغيل السكربت</h3>
+        <div class="code-block">
+            <code>
+<span class="comment"># 1. إنشاء الملف</span>
+touch myscript.sh
+
+<span class="comment"># 2. تعديل الملف</span>
+nano myscript.sh
+
+<span class="comment"># 3. جعله قابل للتنفيذ</span>
+chmod +x myscript.sh
+
+<span class="comment"># 4. تشغيله</span>
+./myscript.sh
+            </code>
+        </div>
+
+        <h2>قراءة المدخلات</h2>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+
+<span class="comment"># قراءة نص من المستخدم</span>
+echo "أدخل اسمك:"
+read name
+echo "مرحباً $name!"
+
+<span class="comment"># قراءة بدون عرض النص المكتوب</span>
+read -s -p "أدخل كلمة المرور: " password
+echo ""
+echo "تم القبول!"
+            </code>
+        </div>
+
+        <h2>المتغيرات</h2>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+
+<span class="comment"># تعريف متغير</span>
+name="Kali"
+version=2024
+pi=3.14
+
+<span class="comment"># طباعة متغير</span>
+echo "نظام التشغيل: $name"
+echo "الإصدار: $version"
+
+<span class="comment"># حسابات بسيطة</span>
+a=10
+b=20
+sum=$((a + b))
+echo "المجموع: $sum"
+            </code>
+        </div>
+
+        <h2>الشروط (if/else)</h2>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+
+echo "أدخل رقم:"
+read number
+
+if [ $number -gt 10 ]; then
+    echo "الرقم أكبر من 10"
+elif [ $number -eq 10 ]; then
+    echo "الرقم يساوي 10"
+else
+    echo "الرقم أقل من 10"
+fi
+            </code>
+        </div>
+
+        <h3>عوامل المقارنة</h3>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>العامل</th>
+                        <th>المعنى</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="code-inline">-eq</span></td><td>يساوي (=)</td></tr>
+                    <tr><td><span class="code-inline">-ne</span></td><td>لا يساوي (≠)</td></tr>
+                    <tr><td><span class="code-inline">-gt</span></td><td>أكبر من (>)</td></tr>
+                    <tr><td><span class="code-inline">-ge</span></td><td>أكبر أو يساوي (≥)</td></tr>
+                    <tr><td><span class="code-inline">-lt</span></td><td>أقل من (<)</td></tr>
+                    <tr><td><span class="code-inline">-le</span></td><td>أقل أو يساوي (≤)</td></tr>
+                    <tr><td><span class="code-inline">=</span></td><td>نص يساوي</td></tr>
+                    <tr><td><span class="code-inline">!=</span></td><td>نص لا يساوي</td></tr>
+                    <tr><td><span class="code-inline">-z</span></td><td>نص فارغ</td></tr>
+                    <tr><td><span class="code-inline">-n</span></td><td>نص غير فارغ</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>الحلقات (Loops)</h2>
+
+        <h3>1. For Loop</h3>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+
+<span class="comment"># طريقة 1: قائمة بسيطة</span>
+for i in 1 2 3 4 5
+do
+    echo "الرقم: $i"
+done
+
+<span class="comment"># طريقة 2: نطاق أرقام</span>
+for i in {1..10}
+do
+    echo "العدّاد: $i"
+done
+
+<span class="comment"># طريقة 3: باستخدام seq</span>
+for i in $(seq 1 10)
+do
+    echo "العدّاد: $i"
+done
+
+<span class="comment"># طريقة 4: تكرار على ملفات</span>
+for file in *.txt
+do
+    echo "ملف: $file"
+done
+            </code>
+        </div>
+
+        <h3>2. While Loop</h3>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+
+count=1
+while [ $count -le 5 ]
+do
+    echo "العدّاد: $count"
+    ((count++))
+done
+            </code>
+        </div>
+
+        <h3>3. Until Loop</h3>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+
+count=1
+until [ $count -gt 5 ]
+do
+    echo "العدّاد: $count"
+    ((count++))
+done
+            </code>
+        </div>
+
+        <h2>أمثلة عملية</h2>
+
+        <h3>مثال 1: ماسح بسيط</h3>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+# Simple Network Scanner
+
+echo "=========================="
+echo "  ماسح الشبكة البسيط"
+echo "=========================="
+echo ""
+echo -n "أدخل نطاق IP (مثال: 192.168.1): "
+read range
+
+echo ""
+echo "جاري المسح..."
+echo ""
+
+for i in $(seq 1 254)
+do
+    ping -c 1 $range.$i | grep "64 bytes" &
+done
+
+echo ""
+echo "انتهى المسح!"
+            </code>
+        </div>
+
+        <h3>مثال 2: فحص المنافذ</h3>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+# Simple Port Scanner
+
+echo "=========================="
+echo "  فحص المنافذ البسيط"
+echo "=========================="
+echo ""
+echo -n "أدخل عنوان IP: "
+read ip
+
+for port in 21 22 23 25 53 80 110 143 443 445 993 995 3389
+do
+    (echo >/dev/tcp/$ip/$port) 2>/dev/null && echo "المنفذ $port مفتوح"
+done
+            </code>
+        </div>
+
+        <h3>مثال 3: أداة استطلاع</h3>
+        <div class="code-block">
+            <code>
+#!/bin/bash
+# Basic Recon Tool
+
+echo "=========================="
+echo "  أداة الاستطلاع"
+echo "=========================="
+echo ""
+
+echo -n "أدخل الهدف: "
+read target
+
+echo ""
+echo "[*] جاري فحص الاتصال..."
+ping -c 2 $target
+
+echo ""
+echo "[*] جاري مسح المنافذ..."
+nmap -F $target
+
+echo ""
+echo "[*] انتهى!"
+            </code>
+        </div>
+
+        <h2>أوامر مفيدة أخرى</h2>
+        <div class="code-block">
+            <code>
+<span class="comment"># تنفيذ أمر نظام</span>
+$(command)
+`command`
+
+<span class="comment"># شروط إضافية</span>
+[ -f file.txt ]    # هل الملف موجود؟
+[ -d directory ]   # هل المجلد موجود؟
+[ -r file.txt ]    # هل الملف قابل للقراءة؟
+[ -w file.txt ]    # هل الملف قابل للكتابة؟
+[ -x file.txt ]    # هل الملف قابل للتنفيذ؟
+            </code>
+        </div>
+
+        <div class="exercise">
+            <div class="exercise-title">📝 تمرين 13: تمارين Bash</div>
+            <ol class="exercise-steps">
+                <li>أنشئ سكربت يسألك عن اسمك ثم يرحّب فيك</li>
+                <li>أنشئ سكربت يستقبل رقم ويقول إذا كان زوجي أم فردي</li>
+                <li>أنشئ سكربت يعرض التاريخ والوقت الحالي</li>
+                <li>أنشئ ماسحاً بسيطاً يفحص 5 أجهزة</li>
+            </ol>
+
+            <details class="solution-toggle">
+                <summary>💡 الحل</summary>
+                <div class="solution-content">
+                    <p><strong>تمرين 1:</strong></p>
+                    <div class="code-block">
+                        <code>
+#!/bin/bash
+echo "أدخل اسمك:"
+read name
+echo "مرحباً $name!"
+                        </code>
+                    </div>
+                    <p><strong>تمرين 2:</strong></p>
+                    <div class="code-block">
+                        <code>
+#!/bin/bash
+echo "أدخل رقم:"
+read num
+if [ $((num % 2)) -eq 0 ]; then
+    echo "الرقم زوجي"
+else
+    echo "الرقم فردي"
+fi
+                        </code>
+                    </div>
+                    <p><strong>تمرين 3:</strong></p>
+                    <div class="code-block">
+                        <code>
+#!/bin/bash
+echo "التاريخ والوقت: $(date)"
+echo "المستخدم: $(whoami)"
+echo "المجلد: $(pwd)"
+uname -a
+                        </code>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="lesson-nav">
+            <a href="12-packages.html" class="prev">السابق: تثبيت الأدوات</a>
+            <a href="14-conclusion.html" class="next">التالي: الخاتمة</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>🐧 Linux for Ethical Hackers - Complete Guide</p>
+        </div>
+    </footer>
+
+</body>
+</html>
